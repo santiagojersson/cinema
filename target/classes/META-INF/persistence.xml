@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="cinema" transaction-type="RESOURCE_LOCAL">
+   <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      <class>com.edu.usa.adf.Datos.Funcion</class>
+      <class>com.edu.usa.adf.Datos.Pelicula</class>
+      <class>com.edu.usa.adf.Datos.Sala</class>
+      <class>com.edu.usa.adf.Datos.Silla</class>
+      <class>com.edu.usa.adf.Datos.Ticket</class>
+      <properties>
+         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cinema"/>
+         <property name="javax.persistence.jdbc.user" value="root"/>
+         <property name="javax.persistence.jdbc.password" value="root"/>
+         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+         <property name="eclipselink.logging.level" value="FINE"/>
+         
+         <property name="eclipselink.dll-generation.output-mode" value="database"/>
+      </properties>
+      
+   </persistence-unit>
+
+</persistence>
