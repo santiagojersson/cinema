@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import com.edu.usa.adf.Datos.Funcion;
 import com.edu.usa.adf.Datos.Pelicula;
 import com.edu.usa.adf.Datos.Sala;
 import com.edu.usa.adf.Datos.Silla;
@@ -149,4 +150,38 @@ public class Consultas {
 		Notification.show("Registro Eliminado");
 		
 	}
+
+	public static void agregarFuncion(String horainicio, Pelicula pelicula, Sala sala) {
+		// TODO Auto-generated method stub
+		  EntityManager entitymanager = emf.createEntityManager( );
+	      entitymanager.getTransaction( ).begin( );
+
+	      Funcion funcion= new Funcion();
+	      
+	      int duracionpeli=pelicula.getDuracion();
+	      String[] horas=horainicio.split(":");
+	      
+	      double finpeli=((duracionpeli*1.0)/(60*1.0));
+	      System.out.println("DIVISION "+finpeli);
+	      finpeli=finpeli+Double.valueOf(horas[0]+"."+horas[1]);
+	      finpeli=Math.round( finpeli * 100.0 ) / 100.0;
+	      funcion.setHoraFin(String.valueOf(finpeli).replace('.', ':'));
+	      funcion.setHoraInicio(horainicio);
+	      funcion.setPelicula(pelicula);
+	      funcion.setSala(sala);
+	      funcion.setId(getFunciones().size()+1);
+	      
+	      entitymanager.persist( funcion );
+	      entitymanager.getTransaction( ).commit( );
+	}
+
+	
+	public static List<Funcion> getFunciones() {
+		EntityManager em = emf.createEntityManager();//Select UPPER(e.ename) from Employee e
+		Query q = em.createQuery("Select u from Funcion u");//
+		List<Funcion> listafunciones =new LinkedList<Funcion>(q.getResultList());
+		return listafunciones;
+	}
+	
+	
 }
